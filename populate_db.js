@@ -1,17 +1,24 @@
 import mysql from 'mysql2/promise';
 import CARS from './Data.js';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
+
+// const dbConfig = {
+
+//   host: process.env.DB_host,
+//   user: process.env.DB_user,
+//   password: process.env_DB_PASSWORD, 
+//   database: process.env_DB_DATABASE,
+
+// };
 
 const dbConfig = {
-
-host: process.env.DB_host,
-  user: process.env.DB_user,
-  password: process.env_DB_PASSWORD, 
-  database: process.env_DB_DATABASE,
-
-};
+    host:"localhost",
+    user:"root",
+    password:"ianbore12",
+    database:"cars"
+}
 
 async function populateDatabase (){
 
@@ -23,7 +30,16 @@ Promise.all(CARS.map (async(car)=>{
 
     const {id,brand,name,imageIndex,price,availability,location}=car;
 
-    const query = "INSERT INTO car_schema (id,brand,name,imageIndex,price,availability,location) VALUES (?,?,?,?,?,?,?)";
+    const query = `INSERT INTO car_schema (id,brand,name,imageIndex,price,availability,location) VALUES (?,?,?,?,?,?,?) 
+    
+    ON DUPLICATE KEY UPDATE
+    brand = VALUES(brand),
+    name = VALUES(name),
+    imageIndex = VALUES(imageIndex),
+    price = VALUES(price),
+    availability = VALUES(availability),
+    location = VALUES(location)
+    `;
     await connection. execute(query, [id, brand, name, imageIndex,price, availability, location] )
 
 
@@ -41,31 +57,31 @@ catch (error){
 
 }
 
-// async function populateImages (){
+async function populateImages (){
 
-//     const connection = await mysql.createConnection (dbConfig);
+    const connection = await mysql.createConnection (dbConfig);
 
 
-//     await Promise.all (CARS.map (async(car)=>{
+    Promise.all (CARS.map (async(car)=>{
 
-//        const {id,image}= car;
+       const {id,image}= car;
 
-//        image.forEach (async (eachImage)=>{
-//         const populateImageQuery = `INSERT INTO car_images(id,image) VALUES(?,?)`;
+       image.forEach (async (eachImage)=>{
+        const populateImageQuery = `INSERT INTO car_images(id,image) VALUES(?,?)`;
 
-//         try {
-//         await connection.execute (populateImageQuery, [id,eachImage.URL])
-//        }
-//        catch (error){
-//         console.log ('Failure to populate images to the database')
-//        }
+        try {
+        await connection.execute (populateImageQuery, [id,eachImage.URL])
+       }
+       catch (error){
+        console.log ('Failure to populate images to the database')
+       }
 
-//        })
+       })
         
-//        }))
+       }))
 
     
-// }
+}
 
 populateDatabase();
-// populateImages()
+// populateImages();
