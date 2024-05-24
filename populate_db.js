@@ -66,17 +66,20 @@ async function populateImages (){
 
        const {id,image}= car;
 
-       image.forEach (async (eachImage)=>{
-        const populateImageQuery = `INSERT INTO car_images(id,image) VALUES(?,?)`;
-
-        try {
-        await connection.execute (populateImageQuery, [id,eachImage.URL])
-       }
-       catch (error){
-        console.log ('Failure to populate images to the database')
-       }
-
-       })
+       Promise.all (
+        image.forEach (async (eachImage)=>{
+            const populateImageQuery = `INSERT INTO car_images(id,URL) VALUES(?,?)`;
+    
+            try {
+            await connection.execute (populateImageQuery, [id,eachImage.URL])
+           }
+           catch (error){
+            console.log ('Failure to populate images to the database');
+            connection.end;
+           }
+    
+           })
+       )
         
        }))
 
@@ -84,4 +87,4 @@ async function populateImages (){
 }
 
 populateDatabase();
-// populateImages();
+populateImages();
