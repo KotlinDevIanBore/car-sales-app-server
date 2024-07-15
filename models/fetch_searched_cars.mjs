@@ -1,4 +1,4 @@
-import { getConnection } from "../../models/db.mjs";
+import { getConnection,closeConnection } from "./db.mjs";
 
 export async function getSearchedCar(searchTerm) {
   const connection = await getConnection();
@@ -14,13 +14,15 @@ export async function getSearchedCar(searchTerm) {
   cs.location
 FROM cars.car_schema cs
 LEFT JOIN cars.car_images ci ON cs.id = ci.car_id 
-WHERE cs.brand LIKE ?  
+WHERE cs.brand LIKE ? 
+OR 
+cs.name LIKE ? 
 GROUP BY
   cs.id, cs.brand, cs.name, cs.price, cs.availability, cs.location;
   `;
 
   try {
-    const [rows] = await connection.execute(query, [`%${searchTerm}%`]);
+    const [rows] = await connection.execute(query, [`%${searchTerm}%`,`%${searchTerm}%`]);
 
 
     const CARS = rows.map((row) => {
@@ -37,11 +39,12 @@ GROUP BY
     });
 
     console.log(CARS);
+    
     return CARS;
   } catch (error) {
     console.error('Error executing query:', error);
     throw error;
   } finally {
-    connection.release();
+    await closeConnection(connection);
   }
 }

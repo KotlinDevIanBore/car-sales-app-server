@@ -1,4 +1,4 @@
-import { getConnection } from "./db.mjs";
+import { closeConnection, getConnection } from "./db.mjs";
 
 let cachedCARS= null;
 let cacheTimeout = null;
@@ -6,6 +6,8 @@ let cacheTimeout = null;
 
 
 async function fetchfromDb() {
+  const connection = await getConnection();
+
   if (cachedCARS && cacheTimeout>Date.now()){
 
     // console.log(`cached cars here${cachedCARS}`)
@@ -20,7 +22,7 @@ return cachedCARS;
  cacheTimeout = null;
 
     try {
-      const connection = await getConnection();
+      
         const query = `
         SELECT
         cs.id AS id,
@@ -55,10 +57,10 @@ return cachedCARS;
         };
       });
   
-      connection.release();
+      // connection.release();
   
       cachedCARS = CARS;
-      cacheTimeout = Date.now()+3000000;
+      cacheTimeout = Date.now()+300000;
 
       // console.log (cachedCARS)
   
@@ -67,6 +69,11 @@ return cachedCARS;
     } catch (error) {
       console.error("Error fetching cars:", error);
       throw error;
+    }
+
+    finally{
+
+      await closeConnection(connection)
     }
 
   }

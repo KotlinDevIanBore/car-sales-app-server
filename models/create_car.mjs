@@ -1,4 +1,4 @@
-import { getConnection } from "./db.mjs";
+import { getConnection, closeConnection } from "./db.mjs";
 
 async function createCar(fetchData,modifiedFormData) {
   const connection = await getConnection();
@@ -37,6 +37,11 @@ async function createCar(fetchData,modifiedFormData) {
   } catch (error) {
     console.error("Database error:", error);
     throw error;
+  }
+
+  finally {
+
+     await closeConnection(connection)
   }
 }
 

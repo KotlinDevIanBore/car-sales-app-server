@@ -1,4 +1,4 @@
-import { getConnection } from "./db.mjs";
+import { closeConnection, getConnection } from "./db.mjs";
 
 
 
@@ -19,9 +19,14 @@ async function createImage(modifiedFormData, fileNames) {
 
         await connection.execute(query, values);
 
-        console.log(`Your car id at create image.js is ${id}`);
+        // console.log(`Your car id at create image.js is ${id}`);
       } catch (error) {
         console.error(`Failed to insert image for car ${id}:`, error);
+      }
+
+      finally {
+
+        await closeConnection(connection)
       }
     })
   );
