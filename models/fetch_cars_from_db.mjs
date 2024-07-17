@@ -60,7 +60,7 @@ return cachedCARS;
       // connection.release();
   
       cachedCARS = CARS;
-      cacheTimeout = Date.now()+300000;
+      cacheTimeout = Date.now()+ 3600000;
 
       // console.log (cachedCARS)
   

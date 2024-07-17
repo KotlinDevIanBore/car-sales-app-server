@@ -31,7 +31,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // app.use(cors());
 
 app.use(cors({
-  origin: ['http://10.50.90.120:3001', 'http://localhost:3001', 'http://localhost:9000'],
+  origin: ['http://10.50.90.120:3001', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`],
   credentials: true
 }));
 
