@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.mjs",
-    "start": "nodemon fetch_cars_from_db.js ",
+    "start": "pm2 start index.mjs --name car-sales-app-server",
+
     "build": "babel . --out-dir dist",
     "run": "node dist/index.js"
   },
