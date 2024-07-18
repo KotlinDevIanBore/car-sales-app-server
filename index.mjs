@@ -16,6 +16,7 @@ import fetchAllCarsRouter from "./routes/fetch_all_cars.mjs";
 import upload from "./infrastracture/upload.mjs";
 import uploadImageRouter from "./routes/upload_images.mjs";
 import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
+import sendClickLogsRouter from "./routes/send_click_logs.mjs";
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use(clickRouter);
 app.use(analyticsRouter)
 app.use(fetchSearchedCars)
 app.use (sendSearchedCarsRouter)
+app.use(sendClickLogsRouter)
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server is running on http://10.50.90.120:${port}`);
 });
