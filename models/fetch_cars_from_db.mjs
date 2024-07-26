@@ -10,7 +10,6 @@ async function fetchfromDb() {
 
   if (cachedCARS && cacheTimeout>Date.now()){
 
-    // console.log(`cached cars here${cachedCARS}`)
 
 return cachedCARS;
   } 
@@ -57,12 +56,10 @@ return cachedCARS;
         };
       });
   
-      // connection.release();
   
       cachedCARS = CARS;
       cacheTimeout = Date.now()+ 3600000;
 
-      // console.log (cachedCARS)
   
       return CARS;
 

@@ -42,10 +42,10 @@ app.post("/api/addCar", _upload.default.array("uploadedCarFile", 30), async (req
     id: (0, _uuid.v4)(),
     imageIndex: 0
   };
-  console.log(`This is modified form data ${JSON.stringify(modifiedFormData)}`);
+  
   try {
     let fileName = req.files.map(file => file.filename);
-    console.log(`Filename at index.mjs is ${fileName}`);
+   
     await (0, _create_car.default)(fetchData, modifiedFormData);
     await (0, _createImage.default)(modifiedFormData, fileName);
     res.status(201).json({
@@ -61,5 +61,5 @@ app.post("/api/addCar", _upload.default.array("uploadedCarFile", 30), async (req
   }
 });
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on http://10.50.90.120:${port}`);
+  
 });

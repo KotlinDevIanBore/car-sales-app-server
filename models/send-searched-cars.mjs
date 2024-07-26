@@ -40,7 +40,7 @@ order by searches DESC;
       searches: row.searches,
     }));
 
-    console.log (`Your searched cars are ${searchedCars}`)
+    
 
     return searchedCars;
 

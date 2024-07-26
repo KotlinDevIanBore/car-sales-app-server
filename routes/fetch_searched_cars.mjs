@@ -21,7 +21,7 @@ fetchSearchedCars.post("/api/search", async (req,res)=>{
   
      
      
-      console.log (`this is search term at index.mjs ${searchTerm}`);
+      
   
       res.json({ message: "Search request received", cars: cars });
   
