@@ -10,6 +10,7 @@ import fetchAllCarsRouter from "./routes/fetch_all_cars.mjs";
 import uploadImageRouter from "./routes/upload_images.mjs";
 import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
 import sendClickLogsRouter from "./routes/send_click_logs.mjs";
+import recieveCarEditsRouter from "./routes/editcar.mjs";
 
 // app.use(cors({
 //   origin: ['http://10.50.90.120:3001', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`, 'https://c228-105-161-86-88.ngrok-free.app'],
@@ -54,6 +55,7 @@ app.use(analyticsRouter)
 app.use(fetchSearchedCars)
 app.use (sendSearchedCarsRouter)
 app.use(sendClickLogsRouter)
+app.use (recieveCarEditsRouter)
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server is running on http://10.50.90.120:${port}`);

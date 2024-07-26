@@ -17,11 +17,11 @@ uploadImageRouter.post("/api/addCar", upload.array("uploadedCarFile", 30), async
       id: uuidv4(),
       imageIndex: 0,
     };
-    console.log(`This is modified form data ${JSON.stringify(modifiedFormData)}`);
+    
   
     try {
       let fileName= req.files.map((file) => (file.filename));
-      console.log (`Filename at index.mjs is ${fileName}`)
+     
     
   
         await createCar(fetchData, modifiedFormData);

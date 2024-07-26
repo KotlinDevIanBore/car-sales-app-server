@@ -13,7 +13,7 @@ sendSearchedCarsRouter.get ('/api/searchedCars', async(req,res)=>{
 
 try {
     const cars = await sendSearchedCars();
-    console.log  (cars)
+    
 
 
     res.json ({cars:cars,message:'Here are searched cars'})

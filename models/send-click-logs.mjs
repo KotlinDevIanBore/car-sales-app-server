@@ -33,7 +33,7 @@ FROM
         ))
 
 
-        console.log(`Data at send click logs is ${JSON.stringify(data)}`);
+        
 
         return data
 

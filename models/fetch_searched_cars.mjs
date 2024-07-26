@@ -38,7 +38,6 @@ GROUP BY
       };
     });
 
-    console.log(CARS);
     
     return CARS;
   } catch (error) {

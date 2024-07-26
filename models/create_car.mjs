@@ -10,7 +10,7 @@ async function createCar(fetchData,modifiedFormData) {
 
 
 
-    console.log (`Your car details that go into car schema for id ${JSON.stringify(id)} are ${JSON.stringify(modifiedFormData)}`)
+    
   const query = `
     INSERT INTO car_schema (id, brand, name, imageIndex, price, availability, location)
     VALUES (?, ?, ?, ?, ?, ?, ?)
