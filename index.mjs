@@ -25,14 +25,14 @@ import recieveCarEditsRouter from "./routes/editcar.mjs";
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT|| 3000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 
 app.use(cors({
-  origin: ['http://10.50.90.120:9000', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`,`http://localhost:5173`],
+  origin: ['http://10.50.90.120:9000', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`,`http://localhost:5173`,'https://car-sales-app-pl98.vercel.app'],
   credentials: true
 }));
 
