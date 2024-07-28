@@ -12,20 +12,12 @@ import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
 import sendClickLogsRouter from "./routes/send_click_logs.mjs";
 import recieveCarEditsRouter from "./routes/editcar.mjs";
 
-// app.use(cors({
-//   origin: ['http://10.50.90.120:3001', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`, 'https://c228-105-161-86-88.ngrok-free.app'],
-//   credentials: true
-// }));
 
-// app.use(cors({
-//   origin: '*',
-//   credentials: true
-// }));
 
 
 const app = express();
 
-const port = process.env.PORT|| 3000;
+const port = process.env.PORT;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
