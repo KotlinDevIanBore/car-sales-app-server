@@ -32,7 +32,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 app.use(cors({
-  origin: ['https://car-sales-app-server.onrender.com/api', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`,`http://localhost:5173`,'https://car-sales-app-pl98.vercel.app'],
+  origin: ['https://car-sales-app-server.onrender.com', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`,`http://localhost:5173`,'https://car-sales-app-pl98.vercel.app'],
   credentials: true
 }));
 
