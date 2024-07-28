@@ -14,7 +14,7 @@ COUNT(*) as count
 
 FROM 
 
- cars.car_click_log ck  
+ cars_sq.car_click_log ck  
  
  
  GROUP by DAY
