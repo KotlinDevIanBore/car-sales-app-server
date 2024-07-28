@@ -13,12 +13,7 @@ const dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database:process.env.DB_DATABASE,
-    port: process.env.DB_PORT ,
-    ssl: {
-        ca: fs.readFileSync('./client-cert.pem'), 
-        key: fs.readFileSync('./client-key.pem') ,
-        rejectUnauthorized: false 
-    }
+    port: process.env.DB_PORT 
 
 }
 
