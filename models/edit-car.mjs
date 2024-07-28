@@ -6,7 +6,7 @@ export default async function EditCarDetails(formData) {
   try {
     const query = `
 
-    UPDATE cars.car_schema
+    UPDATE cars_sq.car_schema
 
     SET 
   brand = ?,
