@@ -24,7 +24,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 app.use(cors({
-  origin: ['https://car-sales-app-server.onrender.com','https://car-sales-app-server.onrender.com/api/cars','http://10.50.90.120:3000', 'http://localhost:3001', 'http://localhost:9000', `http://10.50.70.108:9000`,`http://localhost:5173`,'https://car-sales-app-pl98.vercel.app'],
+  origin: ['https://car-sales-app-server.onrender.com',
+    'https://car-sales-app-server.onrender.com/api/cars',
+    'https://car-sales-app-pl98-6jteqku5m-ian-bores-projects.vercel.app/',
+    'https://car-sales-app-server.onrender.com/api/cars',
+    'http://10.50.90.120:3000', 
+    'http://localhost:9000',
+     `http://localhost:5173`,
+     'https://car-sales-app-pl98.vercel.app'],
   credentials: true
 }));
 
