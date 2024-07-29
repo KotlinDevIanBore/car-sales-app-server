@@ -49,7 +49,7 @@ app.use (sendSearchedCarsRouter)
 app.use(sendClickLogsRouter)
 app.use (recieveCarEditsRouter)
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server is running on http://10.50.90.120:${port}`);
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`)
 });
 
