@@ -1,4 +1,5 @@
 import { closeConnection, getConnection } from "./db.mjs";
+import { API_URL } from "../API_URL";
 
 let cachedCARS= null;
 let cacheTimeout = null;
@@ -7,7 +8,6 @@ let cacheTimeout = null;
 
 async function fetchfromDb() {
   const connection = await getConnection();
-
   if (cachedCARS && cacheTimeout>Date.now()){
 
 
@@ -49,7 +49,7 @@ return cachedCARS;
           brand: row.brand,
           name: row.name,
           imageIndex: "0",
-          image: row.imageURLS.split(',').map((url) => ({ URL: `http://localhost:3000/uploads/${url}` })),
+          image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/${url}` })),
           price: row.price,
           availability: row.availability,
           location: row.location,
@@ -59,6 +59,10 @@ return cachedCARS;
   
       cachedCARS = CARS;
       cacheTimeout = Date.now()+ 3600000;
+
+      // throw new Error("Test error");
+
+      console.log (CARS);
 
   
       return CARS;

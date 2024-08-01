@@ -1,5 +1,5 @@
 import testFetchFromDb from "./test.mjs/test-fetch-from-db.mjs";
-import testConnection from "./test.mjs/test-connection.mjs";
+import testConnection from "./test-connection.mjs";
 import testMostClickedCars from "./test.mjs/test-mostClickedCars.mjs";
 import testsendClickLogs from "./test.mjs/testsendClickLogs.mjs";
 

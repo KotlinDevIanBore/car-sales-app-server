@@ -1,3 +1,4 @@
+import { API_URL } from "../API_URL";
 import { getConnection,closeConnection } from "./db.mjs";
 
 let cachedCars = null
@@ -57,7 +58,7 @@ export default async function mostClickedCars() {
         name: row.name,
         imageIndex: row.imageIndex,
         image: row.imageURLS.split(',').map((url) => ({
-          URL: `http://localhost:3000/uploads/${url}`,
+          URL: `${API_URL}/${url}`,
         })),
         price: row.price,
         availability: row.availability,

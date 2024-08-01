@@ -1,3 +1,4 @@
+import { API_URL } from "../API_URL";
 import { getConnection,closeConnection } from "./db.mjs";
 
 export async function getSearchedCar(searchTerm) {
@@ -31,7 +32,7 @@ GROUP BY
         brand: row.brand,
         name: row.name,
         imageIndex: "0",
-        image: row.imageURLS.split(',').map((url) => ({ URL: `http://localhost:3000/uploads/${url}` })),
+        image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/${url}` })),
         price: row.price,
         availability: row.availability,
         location: row.location,

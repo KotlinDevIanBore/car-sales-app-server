@@ -1,8 +1,7 @@
 import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
-dotenv.config()
-// config({ path: './.env' }); 
-import fs from 'fs'; // Add this line to import the 'fs' module
+import { config } from 'dotenv';
+config({ path: './car.env' }); 
+import fs from 'fs'; 
 
 
 
@@ -23,17 +22,15 @@ const dbConfig = {
 
 }
 
-console.log(dbConfig);
-
 const connectionPool = mysql.createPool(dbConfig);
 
 
 async function getConnection (){
 
     try {
-        const res = await connectionPool.getConnection();
-        return res;
-    
+
+        const connection = await connectionPool.getConnection();
+return connection;    
     }catch (error){
     
         console.error ('connection to database failed', error)
@@ -44,7 +41,13 @@ async function getConnection (){
 }
 
 async function closeConnection (connection){
-    connection.release();
+    try {
+       await connection.release();
+      } catch (error) {
+        console.error('Error releasing connection:', error);
+        throw error; // Re-throw the error
+
+      }
 }
 
 export { getConnection, closeConnection };
