@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
-import { config } from 'dotenv';
-config()
+import dotenv from 'dotenv';
+dotenv.config()
 // config({ path: './.env' }); 
 import fs from 'fs'; // Add this line to import the 'fs' module
 
@@ -23,13 +23,16 @@ const dbConfig = {
 
 }
 
+console.log(dbConfig);
+
 const connectionPool = mysql.createPool(dbConfig);
 
 
 async function getConnection (){
 
     try {
-        return connectionPool.getConnection();
+        const res = await connectionPool.getConnection();
+        return res;
     
     }catch (error){
     
