@@ -23,7 +23,7 @@ GROUP BY
   `;
 
   try {
-    const [rows] = await connection.execute(query, [`%${searchTerm}%`,`%${searchTerm}%`]);
+    const [rows] = await connection.query(query, [`%${searchTerm}%`,`%${searchTerm}%`]);
 
 
     const CARS = rows.map((row) => {

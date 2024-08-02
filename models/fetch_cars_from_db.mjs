@@ -41,7 +41,7 @@ return cachedCARS;
       GROUP BY
         cs.id, cs.brand, cs.name, cs.price, cs.availability, cs.location;`
   
-      const [rows] = await connection.execute(query);
+      const [rows] = await connection.query(query);
   
       const CARS = rows.map((row) => {
         return {
