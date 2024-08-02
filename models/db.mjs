@@ -1,9 +1,11 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
-dotenv.config();
-//config({ path: './car.env' }); 
-import fs from 'fs'; 
+import { config } from 'dotenv';
 
+dotenv.config();
+config({ path: './car.env' }); 
+config();
+import fs from 'fs'; 
 
 
 
