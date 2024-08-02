@@ -11,9 +11,7 @@ import uploadImageRouter from "./routes/upload_images.mjs";
 import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
 import sendClickLogsRouter from "./routes/send_click_logs.mjs";
 import recieveCarEditsRouter from "./routes/editcar.mjs";
-import {getConnection} from "./models/db.mjs";
 
-const db = getConnection()
 
 
 const app = express();
@@ -59,9 +57,7 @@ app.use(sendClickLogsRouter)
 app.use (recieveCarEditsRouter)
 
 app.listen(port, '0.0.0.0', () => {
- if(db) {
-  console.log('database connected')
- }
+
   console.log(`App listening on port ${port}`);
 });
 
