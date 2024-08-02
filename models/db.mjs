@@ -13,14 +13,16 @@ const dbConfig = {
   ssl: {
     ca: fs.readFileSync('./client-cert.pem'),
     key: fs.readFileSync('./client-key.pem'),
-    rejectUnauthorized: false, // Consider setting this to true
+    rejectUnauthorized: false, 
   },
 };
 
 const connectionPool = mysql.createPool(dbConfig);
 
+
 async function getConnection() {
   try {
+    
     const connection = await connectionPool.getConnection();
     return connection;
   } catch (error) {
@@ -38,4 +40,4 @@ async function closeConnection(connection) {
   }
 }
 
-export { getConnection, closeConnection };
+export { getConnection, closeConnection }; 
