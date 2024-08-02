@@ -60,5 +60,3 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`App listening on port ${port}`);
 });
 
-app.keepAliveTimeout = 120000; // 120 seconds
-app.headersTimeout = 120000; // 120 seconds
