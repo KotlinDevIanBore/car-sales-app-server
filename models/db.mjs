@@ -35,8 +35,8 @@ const connectionPool = mysql.createPool(dbConfig);
     }catch (error){
     
         console.error ('connection to database failed', error)
-        return error;
-    }
+        throw new Error('Failed to get connection from pool'); // Re-throw a new error
+      }
 
     
 }

@@ -48,8 +48,9 @@ app.get('/', (req, res) => {
 });
 
 
-app.use (uploadImageRouter)
 app.use(fetchAllCarsRouter)
+app.use (uploadImageRouter)
+
 app.use(clickRouter);
 app.use(analyticsRouter)
 app.use(fetchSearchedCars)
