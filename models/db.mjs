@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise';
-import { config } from 'dotenv';
-config({ path: './car.env' }); 
+import dotenv from 'dotenv';
+dotenv.config();
+//config({ path: './car.env' }); 
 import fs from 'fs'; 
 
 
@@ -25,16 +26,16 @@ const dbConfig = {
 const connectionPool = mysql.createPool(dbConfig);
 
 
-async function getConnection (){
+ async function getConnection (){
 
     try {
 
         const connection = await connectionPool.getConnection();
-return connection;    
+        return connection;    
     }catch (error){
     
         console.error ('connection to database failed', error)
-        throw error;
+        return error;
     }
 
     
