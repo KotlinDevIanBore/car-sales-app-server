@@ -13,8 +13,8 @@ export async function getSearchedCar(searchTerm) {
   GROUP_CONCAT(ci.URL) AS imageURLS,
   cs.availability,
   cs.location
-FROM cars_sq.car_schema cs
-LEFT JOIN cars_sq.car_images ci ON cs.id = ci.car_id 
+FROM defaultdb.car_schema cs
+LEFT JOIN defaultdb.car_images ci ON cs.id = ci.car_id 
 WHERE cs.brand LIKE ? 
 OR 
 cs.name LIKE ? 
