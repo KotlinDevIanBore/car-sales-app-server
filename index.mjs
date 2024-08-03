@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
   res.redirect('/api/cars');
 });
 
-app.use('/api', serveImages);
+app.use('/api/images', serveImages)
 app.use(fetchAllCarsRouter)
 app.use (uploadImageRouter)
 

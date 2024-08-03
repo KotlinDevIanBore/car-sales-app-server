@@ -9,9 +9,6 @@ const uploadsFolder = path.join(__dirname, '../uploads');
 
 const serveImages = express.Router();
 
-serveImages.get('/images/:filename', (req, res) => {
-  const filename = req.params.filename;
-  res.sendFile(path.join(uploadsFolder, filename));
-});
+serveImages.use(express.static(uploadsFolder));
 
 export default serveImages;
