@@ -12,6 +12,8 @@ import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
 import sendClickLogsRouter from "./routes/send_click_logs.mjs";
 import recieveCarEditsRouter from "./routes/editcar.mjs";
 import serveImages from "./infrastracture/serve-images.mjs";
+import { dirname } from 'path';
+
 
 const app = express();
 
@@ -32,7 +34,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../uploads")));
+app.use(express.static(path.join(__dirname, "./uploads")));
 
 app.use((req, res, next) => {
   console.log(`Serving static file from ${req.url}`);
@@ -43,7 +45,6 @@ app.get('/', (req, res) => {
   res.redirect('/api/cars');
 });
 
-app.use('/api/images', serveImages)
 app.use(fetchAllCarsRouter)
 app.use (uploadImageRouter)
 
