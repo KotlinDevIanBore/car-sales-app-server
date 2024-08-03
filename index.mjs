@@ -12,7 +12,6 @@ import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
 import sendClickLogsRouter from "./routes/send_click_logs.mjs";
 import recieveCarEditsRouter from "./routes/editcar.mjs";
 import serveImages from "./infrastracture/serve-images.mjs";
-import { dirname } from 'path';
 
 
 const app = express();
