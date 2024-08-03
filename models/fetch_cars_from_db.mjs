@@ -49,7 +49,7 @@ return cachedCARS;
           brand: row.brand,
           name: row.name,
           imageIndex: "0",
-          image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/images/${url}` })),
+          image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
           price: row.price,
           availability: row.availability,
           location: row.location,
