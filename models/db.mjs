@@ -12,7 +12,6 @@ const dbConfig = {
   port: process.env.DB_PORT,
   ssl: {
     ca: fs.readFileSync('./client-cert.pem'),
-    key: fs.readFileSync('./client-key.pem'),
     rejectUnauthorized: false, 
   },
 };

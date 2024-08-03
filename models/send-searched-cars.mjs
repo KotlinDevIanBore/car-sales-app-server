@@ -10,13 +10,13 @@ cs.brand,
 cs.name,
 cs.imageIndex ,
 
-(SELECT group_concat(ci.URL) FROM cars_sq.car_images ci WHERE  csc.car_id= ci.car_id   ) as URL,
+(SELECT group_concat(ci.URL) FROM defaultdb.car_images ci WHERE  csc.car_id= ci.car_id   ) as URL,
 cs.price,
 cs.availability,
 cs.location, 
 csc.searches
-FROM cars_sq.car_searches csc
-left join cars_sq.car_schema cs 
+FROM defaultdb.car_searches csc
+left join defaultdb.car_schema cs 
 
 on cs.id = csc.car_id
 group by  cs.brand,cs.name,cs.imageIndex,cs.price,cs.availability,cs.location, csc.searches, csc.car_id

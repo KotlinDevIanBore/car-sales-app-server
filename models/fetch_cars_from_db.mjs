@@ -33,9 +33,9 @@ return cachedCARS;
         cs.availability AS availability,
         cs.location AS location
       FROM
-        cars_sq.car_schema cs
+        defaultdb.car_schema cs
       LEFT JOIN
-        cars_sq.car_images ci ON cs.id = ci.car_id
+        defaultdb.car_images ci ON cs.id = ci.car_id
       WHERE
         ci.URL IS NOT NULL
       GROUP BY
