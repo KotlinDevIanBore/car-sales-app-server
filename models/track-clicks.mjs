@@ -8,7 +8,7 @@ export default async function updateClicks(carid) {
         
 
         const query = `
-      INSERT INTO cars.car_clicks (car_id, clicks)
+      INSERT INTO defaultdb.car_clicks (car_id, clicks)
       VALUES (?, 1)
       ON DUPLICATE KEY UPDATE clicks = clicks + 1;
 
