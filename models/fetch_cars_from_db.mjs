@@ -62,7 +62,7 @@ return cachedCARS;
 
       // throw new Error("Test error");
 
-      console.log (CARS[1]);
+      // console.log (CARS[1]);
 
   
       return CARS;
