@@ -12,7 +12,7 @@ export default async function updateClicks(carid) {
       VALUES (?, 1)
       ON DUPLICATE KEY UPDATE clicks = clicks + 1;
 
-      INSERT INTO cars.car_click_log (car_id, click_timestamp)
+      INSERT INTO defaultdb.car_click_log (car_id, click_timestamp)
       VALUES (?, NOW());
     `;
 
