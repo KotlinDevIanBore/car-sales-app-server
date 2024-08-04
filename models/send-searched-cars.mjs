@@ -33,7 +33,8 @@ order by searches DESC;
       name: row.name,
       imageIndex: row.imageIndex,
       image: row.URL.split(",").map((url) => ({
-        URL: `${API_URL}/uploads/${url}`,
+        URL: `${API_URL}/api/images/${url}`,
+        // { URL: `${API_URL}/api/images/${url}` }
       })),
       price: row.price,
       availability: row.availability,
