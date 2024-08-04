@@ -35,10 +35,10 @@ app.use(cors({
 
 app.use(express.json());
 app.use('/api/images', express.static(path.join(__dirname, "./uploads")));
-app.use((req, res, next) => {
-  console.log(`Serving static file from ${req.url}`);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(`Serving static file from ${req.url}`);
+//   next();
+// });
 
 app.get('/', (req, res) => {
   res.redirect('/api/cars');
