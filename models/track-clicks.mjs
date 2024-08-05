@@ -6,13 +6,13 @@ export default async function updateClicks(carid) {
     try {
         
         
-
+ 
         const query = `
-      CALL PopulateCarClicks(?,?)
+      CALL PopulateCarClicks(?)
     `;
 
         
-        await connection.execute(query, [carid,carid]);
+        await connection.execute(query, [carid]);
         
     } catch (error) {
         console.error('Error updating clicks:', error);
