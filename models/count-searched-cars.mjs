@@ -2,7 +2,7 @@ import { getConnection, closeConnection } from "./db.mjs";
 
 async function populateCarSearches(searchedCars) {
   if (!Array.isArray(searchedCars) || searchedCars.length === 0) {
-    throw new Error("searchedCars should be a non-empty array");
+    return {error:"searchedCars should be a non-empty array"} ;
   }
 
   const connection = await getConnection();
