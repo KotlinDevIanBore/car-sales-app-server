@@ -8,12 +8,7 @@ export default async function updateClicks(carid) {
         
 
         const query = `
-      INSERT INTO defaultdb.car_clicks (car_id, clicks)
-      VALUES (?, 1)
-      ON DUPLICATE KEY UPDATE clicks = clicks + 1;
-
-      INSERT INTO defaultdb.car_click_log (car_id, click_timestamp)
-      VALUES (?, NOW());
+      CALL PopulateCarClicks(?,?)
     `;
 
         
@@ -21,6 +16,7 @@ export default async function updateClicks(carid) {
         
     } catch (error) {
         console.error('Error updating clicks:', error);
+        throw error;
     }
 
 
@@ -28,3 +24,20 @@ export default async function updateClicks(carid) {
         await closeConnection(connection);
     }
 }
+
+const storedProcedure = `
+DELIMITER //
+
+CREATE PROCEDURE PopulateCarClicks(IN car_id INT)
+BEGIN
+    INSERT INTO defaultdb.car_clicks (car_id, clicks)
+      VALUES (car_id, 1)
+      ON DUPLICATE KEY UPDATE clicks = clicks + 1;
+
+      INSERT INTO defaultdb.car_click_log (car_id, click_timestamp)
+      VALUES (car_id, NOW());
+END //
+
+DELIMITER ;
+
+`
