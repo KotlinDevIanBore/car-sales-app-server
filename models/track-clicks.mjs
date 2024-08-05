@@ -2,13 +2,18 @@ import { getConnection, closeConnection } from "./db.mjs";
 
 export default async function updateClicks(carid) {
 
+    if(!carid){
+        throw new Error ("Carid is required");
+        return;
+    }
+
     const connection = await getConnection();
     try {
         
         
  
         const query = `
-      CALL PopulateCarClicks(?)
+      CALL PopulateCarClicks1(?)
     `;
 
         
@@ -28,7 +33,7 @@ export default async function updateClicks(carid) {
 const storedProcedure = `
 DELIMITER //
 
-CREATE PROCEDURE PopulateCarClicks(IN car_id INT)
+CREATE PROCEDURE PopulateCarClicks1(IN car_id varchar(128))
 BEGIN
     INSERT INTO defaultdb.car_clicks (car_id, clicks)
       VALUES (car_id, 1)
