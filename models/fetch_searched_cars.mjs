@@ -20,9 +20,9 @@ export async function getSearchedCar(searchTerm) {
     params.push (`%${element}%`);
     params.push (`%${element}%`);
 
-    conditions.push (`cs.brand LIKE ? 
-cs.name LIKE ? 
-`)
+    conditions.push (`cs.brand LIKE ? `);
+    conditions.push (`cs.name LIKE ? `);
+
 
 
     
@@ -39,7 +39,7 @@ cs.name LIKE ?
   cs.price,
   GROUP_CONCAT(ci.URL) AS imageURLS,
   cs.availability,
-  cs.location
+  cs.location 
 FROM defaultdb.car_schema cs
 LEFT JOIN defaultdb.car_images ci ON cs.id = ci.car_id 
 
