@@ -59,7 +59,6 @@ export default async function mostClickedCars() {
         imageIndex: row.imageIndex,
         image: row.imageURLS.split(',').map((url) => ({
           URL: `${API_URL}/api/images/${url}`,
-     // { URL: `${API_URL}/api/images/${url}` }
 
         })),
         price: row.price,

@@ -4,6 +4,33 @@ import { getConnection,closeConnection } from "./db.mjs";
 export async function getSearchedCar(searchTerm) {
   const connection = await getConnection();
 
+
+  // const testsearchTerm= "mazda axela";
+
+
+  const splitSearchTerm= searchTerm.split( " ");
+  const params =[ ];
+  const conditions = [];
+
+
+  splitSearchTerm.forEach(element => {
+
+
+
+    params.push (`%${element}%`);
+    params.push (`%${element}%`);
+
+    conditions.push (`cs.brand LIKE ? 
+cs.name LIKE ? 
+`)
+
+
+    
+  });
+
+  console.log (params, conditions)
+
+
   const query = `
   SELECT 
   cs.id,
@@ -15,15 +42,16 @@ export async function getSearchedCar(searchTerm) {
   cs.location
 FROM defaultdb.car_schema cs
 LEFT JOIN defaultdb.car_images ci ON cs.id = ci.car_id 
-WHERE cs.brand LIKE ? 
-OR 
-cs.name LIKE ? 
+
+WHERE ${conditions.join(" OR ")}
+
+
 GROUP BY
   cs.id, cs.brand, cs.name, cs.price, cs.availability, cs.location;
   `;
 
   try {
-    const [rows] = await connection.execute(query, [`%${searchTerm}%`,`%${searchTerm}%`]);
+    const [rows] = await connection.execute(query, params);
 
 
     const CARS = rows.map((row) => {
