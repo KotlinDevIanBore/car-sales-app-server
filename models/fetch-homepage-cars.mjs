@@ -1,30 +1,21 @@
- import { closeConnection, getConnection } from "./db.mjs";
+import { API_URL } from "../API_URL";
+import { closeConnection, getConnection } from "./db.mjs";
 
+async function fetchHomePage(cohort_id) {
+  const connection = await getConnection();
 
- async function fetchHomePage (cohort_id){
-
-
-    const connection = await getConnection();
-
-    try {
-        const query1 = `
-    SELECT * FROM defaultdb.car_schema dcs
-inner join defaultdb.car_id_cohort dcc
-
-on dcs.id = dcc.car_id
- where dcc.cohort_id = ?;
-`
-
-const query = `
+  try {
+    const query = `
 SELECT 
 
 dcs.id,
 dcs.brand,
 dcs.name,
 dcs.imageIndex,
-GROUP_CONCAT (dci.URL) AS URL,
+GROUP_CONCAT ( DISTINCT dci.URL) AS URL,
 dcs.price,
-dcs.availability
+dcs.availability,
+dcs.location
 
  FROM defaultdb.car_schema dcs
 inner join defaultdb.car_id_cohort dcc
@@ -33,26 +24,35 @@ on dcs.id = dcc.car_id
 
 inner join defaultdb.car_images dci 
 on dcs.id = dci.car_id
- where dcc.cohort_id = 'muscle' group by dcs.id;
-`
+ where dcc.cohort_id = ? 
+ group by dcs.id;
+`;
 
-const result = await connection.execute (query,[cohort_id]);
-
-return result;
-    }
-
-    catch (error){
+    const [rows] = await connection.execute(query, [cohort_id]);
 
 
-        console.error ('error fetchingHomePage details from the database')
+    const cars = rows.map((row) => ({
+      id: row.id,
+      brand: row.brand,
+      name: row.name,
+      imageIndex: row.imageIndex,
+      image: row.URL.split(",").map((url) => ({URL:`${API_URL}/api/images/${url}`})),
+      //image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
 
-    }
+      //    URL: row.URL ,
+      //image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
 
-    finally {
+      price: row.price,
+      availability: row.availability,
+      location: row.location,
+    }));
 
-         await closeConnection(connection);
-    }
+    return cars;
+  } catch (error) {
+    throw error;
+  } finally {
+    await closeConnection(connection);
+  }
+}
 
- }
-
- export default fetchHomePage;
+export default fetchHomePage;

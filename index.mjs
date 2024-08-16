@@ -12,6 +12,7 @@ import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
 import sendClickLogsRouter from "./routes/send_click_logs.mjs";
 import recieveCarEditsRouter from "./routes/editcar.mjs";
 import serveImages from "./infrastracture/serve-images.mjs";
+import fetchhomePageCarsRouter from "./routes/fetch-homepage-cars.mjs";
 
 
 const app = express();
@@ -53,6 +54,7 @@ app.use(fetchSearchedCars)
 app.use (sendSearchedCarsRouter)
 app.use(sendClickLogsRouter)
 app.use (recieveCarEditsRouter)
+app.use (fetchhomePageCarsRouter)
 
 app.listen(port, '0.0.0.0', () => {
 
