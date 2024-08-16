@@ -25,14 +25,14 @@ export default async function mostClickedCars() {
     cs.brand,
     cs.name,
     cs.imageIndex,
-    (SELECT GROUP_CONCAT(DISTINCT ci.URL) FROM cars_sq.car_images ci WHERE ci.car_id = cs.id) AS imageURLS,
+    (SELECT GROUP_CONCAT(DISTINCT ci.URL) FROM defaultdb.car_images ci WHERE ci.car_id = cs.id) AS imageURLS,
     cs.price,
     cs.availability,
     cs.location,
     cl.clicks
     
-    FROM cars_sq.car_clicks cl
-    LEFT JOIN cars_sq.car_schema cs ON cl.car_id = cs.id
+    FROM defaultdb.car_clicks cl
+    LEFT JOIN defaultdb.car_schema cs ON cl.car_id = cs.id
     
     GROUP BY 
     cs.id, 
@@ -58,7 +58,8 @@ export default async function mostClickedCars() {
         name: row.name,
         imageIndex: row.imageIndex,
         image: row.imageURLS.split(',').map((url) => ({
-          URL: `${API_URL}/${url}`,
+          URL: `${API_URL}/api/images/${url}`,
+
         })),
         price: row.price,
         availability: row.availability,

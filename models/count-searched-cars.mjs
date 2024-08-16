@@ -2,7 +2,7 @@ import { getConnection, closeConnection } from "./db.mjs";
 
 async function populateCarSearches(searchedCars) {
   if (!Array.isArray(searchedCars) || searchedCars.length === 0) {
-    throw new Error("searchedCars should be a non-empty array");
+    return {error:"searchedCars should be a non-empty array"} ;
   }
 
   const connection = await getConnection();
@@ -19,7 +19,7 @@ async function populateCarSearches(searchedCars) {
 
       const { id } = car;
       const query = `
-        INSERT INTO cars_sq.car_searches (car_id, searches)
+        INSERT INTO defaultdb.car_searches (car_id, searches)
         VALUES (?, 1)
         ON DUPLICATE KEY UPDATE searches = searches + 1
       `;

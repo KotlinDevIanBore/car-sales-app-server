@@ -1,10 +1,9 @@
-import { getConnection,closeConnection } from "./db.mjs";
+import { getConnection, closeConnection } from "./db.mjs";
 
-async function sendClickLogs(){
+async function sendClickLogs() {
+  const connection = await getConnection();
 
-    const connection = await getConnection ();
-
-    const query= `
+  const query = `
    SELECT 
 '2024' as 'group',
 DATE(click_timestamp) as DAY,
@@ -14,42 +13,30 @@ COUNT(*) as count
 
 FROM 
 
- cars_sq.car_click_log ck  
+ defaultdb.car_click_log ck  
  
  
  GROUP by DAY
  
  order by DAY DESC;
-    `
+    `;
 
-    try{
-        const [rows] = await connection.execute(query);
-       const data= rows.map ((row)=>(
-            {
-                group: row.group,
-                date: row.DAY,
-                value: row.count
-              }
-        ))
+  try {
+    const [rows] = await connection.execute(query);
+    const data = rows.map((row) => ({
+      group: row.group,
+      date: row.DAY,
+      value: row.count,
+    }));
 
-
-        
-
-        return data
-
-    }
-catch(error){
-
-    console.error ('Failed to fetch click logs',error);
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch click logs", error);
 
     throw error;
-
+  } finally {
+    await closeConnection(connection);
+  }
 }
 
-finally {
-    await closeConnection(connection)
-}
-
-}
-
-export default sendClickLogs
+export default sendClickLogs;

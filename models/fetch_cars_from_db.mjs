@@ -33,9 +33,9 @@ return cachedCARS;
         cs.availability AS availability,
         cs.location AS location
       FROM
-        cars_sq.car_schema cs
+        defaultdb.car_schema cs
       LEFT JOIN
-        cars_sq.car_images ci ON cs.id = ci.car_id
+        defaultdb.car_images ci ON cs.id = ci.car_id
       WHERE
         ci.URL IS NOT NULL
       GROUP BY
@@ -49,7 +49,7 @@ return cachedCARS;
           brand: row.brand,
           name: row.name,
           imageIndex: "0",
-          image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/${url}` })),
+          image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
           price: row.price,
           availability: row.availability,
           location: row.location,
@@ -62,7 +62,7 @@ return cachedCARS;
 
       // throw new Error("Test error");
 
-      console.log (CARS);
+      // console.log (CARS[1]);
 
   
       return CARS;

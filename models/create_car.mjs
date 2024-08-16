@@ -2,7 +2,7 @@ import { getConnection, closeConnection } from "./db.mjs";
 
 async function createCar(fetchData,modifiedFormData) {
   const connection = await getConnection();
-  const {brand, name, price, availability, location } =
+  const {brand, name, price, availability, location,cohort } =
     fetchData;
 
     const {id,imageIndex}= modifiedFormData;
@@ -12,15 +12,7 @@ async function createCar(fetchData,modifiedFormData) {
 
     
   const query = `
-    INSERT INTO car_schema (id, brand, name, imageIndex, price, availability, location)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-    ON DUPLICATE KEY UPDATE
-    brand = VALUES(brand),
-    name = VALUES(name),
-    imageIndex = VALUES(imageIndex),
-    price = VALUES(price),
-    availability = VALUES(availability),
-    location = VALUES(location)
+   CALL sp_create_car(?,?,?,?,?,?,?,?);
   `;
 
   try {
@@ -32,6 +24,7 @@ async function createCar(fetchData,modifiedFormData) {
       price,
       availability,
       location,
+      cohort
     ]);
     return "connection executed";
   } catch (error) {
