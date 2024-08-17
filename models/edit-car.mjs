@@ -3,6 +3,9 @@ import { getConnection, closeConnection } from "./db.mjs";
 export default async function EditCarDetails(formData) {
   const connection = await getConnection();
 
+
+  console.log (`form data includes the folloing`, formData)
+
   try {
     const query = `
 
@@ -25,7 +28,7 @@ export default async function EditCarDetails(formData) {
         formData.price,
         formData.availability,
         formData.location,
-        formData.carId
+        formData.id
 
     ]
 
