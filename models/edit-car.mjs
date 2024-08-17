@@ -7,7 +7,7 @@ export default async function EditCarDetails(formData) {
   console.log (`form data includes the folloing`, formData)
 
   try {
-    const query = `
+    const query1 = `
 
     UPDATE defaultdb.car_schema
 
@@ -22,14 +22,16 @@ export default async function EditCarDetails(formData) {
     
     
     `
-    const values = [
-        formData.brand,
-        formData.name,
-        formData.price,
-        formData.availability,
-        formData.location,
-        formData.id
 
+    const query = ` call edit_all_cars (?,?,?,?,?,?,?)`
+    const values = [
+      formData.brand,
+      formData.name,
+      formData.price,
+      formData.availability,
+      formData.location,
+      formData.cohort,
+      formData.id
     ]
 
          
