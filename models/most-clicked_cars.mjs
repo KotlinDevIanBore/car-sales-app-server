@@ -29,7 +29,8 @@ export default async function mostClickedCars() {
     cs.price,
     cs.availability,
     cs.location,
-    cl.clicks
+    SUM (cl.clicks) as totalClicks
+    
     
     FROM defaultdb.car_clicks cl
     LEFT JOIN defaultdb.car_schema cs ON cl.car_id = cs.id
@@ -41,11 +42,9 @@ export default async function mostClickedCars() {
     cs.imageIndex, 
     cs.price, 
     cs.availability, 
-    cs.location, 
-    cl.clicks
-    
+    cs.location    
     ORDER BY 
-    cl.clicks DESC;
+    totalClicks DESC;
         
           
         
@@ -64,7 +63,7 @@ export default async function mostClickedCars() {
         price: row.price,
         availability: row.availability,
         location: row.location,
-        clicks:row.clicks
+        clicks:row.totalClicks
       }));
     
       console.log (`timer reset at ${Date.now()}`)

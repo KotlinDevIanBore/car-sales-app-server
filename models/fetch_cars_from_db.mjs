@@ -23,6 +23,7 @@ return cachedCARS;
     try {
       
         const query = `
+
         SELECT
         cs.id AS id,
         cs.brand AS brand,
@@ -31,15 +32,20 @@ return cachedCARS;
           GROUP_CONCAT(DISTINCT ci.URL) AS imageURLS,
   
         cs.availability AS availability,
-        cs.location AS location
+        cs.location AS location,
+        dci.cohort_id AS cohort
       FROM
         defaultdb.car_schema cs
       LEFT JOIN
         defaultdb.car_images ci ON cs.id = ci.car_id
+        
+	LEFT JOIN defaultdb.car_id_cohort dci on cs.id = dci.car_id
       WHERE
         ci.URL IS NOT NULL
       GROUP BY
-        cs.id, cs.brand, cs.name, cs.price, cs.availability, cs.location;`
+        cs.id, cs.brand, cs.name, cs.price, cs.availability, cs.location;
+        
+        `
   
       const [rows] = await connection.execute(query);
   
@@ -53,6 +59,7 @@ return cachedCARS;
           price: row.price,
           availability: row.availability,
           location: row.location,
+          cohort: row.cohort
         };
       });
   
