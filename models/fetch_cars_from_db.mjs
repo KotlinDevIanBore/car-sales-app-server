@@ -26,6 +26,8 @@ return cachedCARS;
 
         
 
+        
+
         SELECT
         cs.id AS id,
         cs.brand AS brand,
@@ -36,7 +38,8 @@ return cachedCARS;
         cs.availability AS availability,
         cs.location AS location,
         dci.cohort_id AS cohort,
-        cmy.manufacture_year AS year
+        cmy.manufacture_year AS year,
+        dcd.car_description AS description
       FROM
         defaultdb.car_schema cs
       LEFT JOIN
@@ -45,11 +48,15 @@ return cachedCARS;
 	LEFT JOIN defaultdb.car_id_cohort dci on cs.id = dci.car_id
     
     LEFT JOIN defaultdb.car_manufacture_year cmy on cs.id = cmy.car_id
+    
+    LEFT JOIN defaultdb.car_description dcd on dcd.car_id = cs.id
   
       WHERE
         ci.URL IS NOT NULL
       GROUP BY
         cs.id, cs.brand, cs.name, cs.price, cs.availability, cs.location;
+        
+
         
 
         
@@ -68,7 +75,8 @@ return cachedCARS;
           availability: row.availability,
           location: row.location,
           cohort: row.cohort,
-          year: row.year
+          year: row.year,
+          description: row.description
         };
       });
   

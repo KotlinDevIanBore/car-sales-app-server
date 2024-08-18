@@ -23,7 +23,7 @@ export default async function EditCarDetails(formData) {
     
     `
 
-    const query = ` call edit_all_cars (?,?,?,?,?,?,?,?)`
+    const query = ` call edit_all_cars (?,?,?,?,?,?,?,?,?)`
     const values = [
       formData.brand,
       formData.name,
@@ -32,7 +32,9 @@ export default async function EditCarDetails(formData) {
       formData.location,
       formData.cohort,
       formData.year,
-      formData.id
+      formData.description,
+      formData.id,
+      
     ]
 
          
