@@ -24,6 +24,8 @@ return cachedCARS;
       
         const query = `
 
+        
+
         SELECT
         cs.id AS id,
         cs.brand AS brand,
@@ -33,17 +35,23 @@ return cachedCARS;
   
         cs.availability AS availability,
         cs.location AS location,
-        dci.cohort_id AS cohort
+        dci.cohort_id AS cohort,
+        cmy.manufacture_year AS year
       FROM
         defaultdb.car_schema cs
       LEFT JOIN
         defaultdb.car_images ci ON cs.id = ci.car_id
         
 	LEFT JOIN defaultdb.car_id_cohort dci on cs.id = dci.car_id
+    
+    LEFT JOIN defaultdb.car_manufacture_year cmy on cs.id = cmy.car_id
+  
       WHERE
         ci.URL IS NOT NULL
       GROUP BY
         cs.id, cs.brand, cs.name, cs.price, cs.availability, cs.location;
+        
+
         
         `
   
@@ -59,7 +67,8 @@ return cachedCARS;
           price: row.price,
           availability: row.availability,
           location: row.location,
-          cohort: row.cohort
+          cohort: row.cohort,
+          year: row.year
         };
       });
   
