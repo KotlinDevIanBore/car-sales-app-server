@@ -82,7 +82,7 @@ return cachedCARS;
   
   
       cachedCARS = CARS;
-      cacheTimeout = Date.now()+ 3600000;
+      cacheTimeout = Date.now()+ 60000;
 
       // throw new Error("Test error");
 
