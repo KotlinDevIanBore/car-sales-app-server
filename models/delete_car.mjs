@@ -11,13 +11,8 @@ async function deleteCar (id) {
   
       const query = ` call deleteCar(?)`
 
-const result = await connection.execute (query, [id])
+  connection.execute (query, [id])
 
-
-if (result.length===0){
-
-    return {status:200 , message : `Car with ID ${id} already deleted`}
-}
 
     }
 
