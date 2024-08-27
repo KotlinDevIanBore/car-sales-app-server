@@ -1,28 +1,14 @@
 import { closeConnection, getConnection } from "./db.mjs";
 import { API_URL } from "../API_URL";
 
-let cachedCARS= null;
+let cachedCARS = null;
 let cacheTimeout = null;
 
-
-
-async function fetchfromDbv1(limit,offset) {
+async function fetchfromDbv1(limit, offset) {
   const connection = await getConnection();
-  if (cachedCARS && cacheTimeout>Date.now()){
 
-
-return cachedCARS;
-  } 
-  
-  
-  
-  else {
-    cachedCARS= null;
- cacheTimeout = null;
-
-    try {
-      
-        const query = `
+  try {
+    const query = `
 
         
 
@@ -61,54 +47,39 @@ return cachedCARS;
 
         
         
-        `
-      const   values = [limit, offset]
-  
-      const [rows] = await connection.execute(query,values);
-  
-      const CARS = rows.map((row) => {
-        return {
-          id: row.id.toString(),
-          brand: row.brand,
-          name: row.name,
-          imageIndex: "0",
-          image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
-          price: row.price,
-          availability: row.availability,
-          location: row.location,
-          cohort: row.cohort,
-          year: row.year,
-          description: row.description
-        };
-      });
-  
-  
-      cachedCARS = CARS;
-      cacheTimeout = Date.now()+ 60000;
+        `;
+    const values = [limit, offset];
 
-      // throw new Error("Test error");
+    const [rows] = await connection.execute(query, values);
 
-      // console.log (CARS[1]);
+    const CARS = rows.map((row) => {
+      return {
+        id: row.id.toString(),
+        brand: row.brand,
+        name: row.name,
+        imageIndex: "0",
+        image: row.imageURLS
+          .split(",")
+          .map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
+        price: row.price,
+        availability: row.availability,
+        location: row.location,
+        cohort: row.cohort,
+        year: row.year,
+        description: row.description,
+      };
+    });
 
-  
-      return CARS;
+    cachedCARS = CARS;
+    cacheTimeout = Date.now() + 60000;
 
-    } catch (error) {
-      console.error("Error fetching cars:", error);
-      throw error;
-    }
-
-    finally{
-
-      await closeConnection(connection)
-    }
-
+    return CARS;
+  } catch (error) {
+    console.error("Error fetching cars:", error);
+    throw error;
+  } finally {
+    await closeConnection(connection);
   }
-
-
-
- 
 }
-
 
 export default fetchfromDbv1;
