@@ -25,7 +25,7 @@ fetchAllCarsRouter.get("/api/cars", async (req, res) => {
       
 
       const limit = req. query.limit;
-      const offset = req.query.page;
+      const offset = req.query.offset;
       const CARS = await fetchfromDbv1(limit,offset);
 
       res.json(CARS);
