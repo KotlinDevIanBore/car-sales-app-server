@@ -6,7 +6,8 @@ import { fileURLToPath } from 'url';
 import clickRouter from "./routes/fetch_clicks.mjs";
 import analyticsRouter from "./routes/analytics.mjs";
 import fetchSearchedCars from "./routes/fetch_searched_cars.mjs";
-import fetchAllCarsRouter from "./routes/fetch_all_cars.mjs";
+import fetchAllCarsRouter from "./routes/fetch_all_cars.mjs"
+import { fetchAllCarsRouterV1 } from "./routes/fetch_all_cars.mjs";
 import uploadImageRouter from "./routes/upload_images.mjs";
 import sendSearchedCarsRouter from "./routes/send-searched-cars.mjs";
 import sendClickLogsRouter from "./routes/send_click_logs.mjs";
@@ -23,7 +24,7 @@ const port = process.env.PORT || 3000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(cors({
-  origin: ['https://car-sales-app-server.onrender.com',
+  origin: ['https://car-sales-app-server-1.onrender.com',
     'https://car-sales-app-server.onrender.com/api/cars',
     'https://car-sales-app-server-1.onrender.com/api/cars',
     'https://car-sales-app-pl98-6jteqku5m-ian-bores-projects.vercel.app/',
@@ -47,6 +48,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(fetchAllCarsRouter)
+app.use (fetchAllCarsRouterV1)
 app.use (uploadImageRouter)
 
 app.use(clickRouter);
