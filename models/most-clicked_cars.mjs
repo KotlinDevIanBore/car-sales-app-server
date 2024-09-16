@@ -60,6 +60,7 @@ export default async function mostClickedCars() {
           URL: `${API_URL}/api/images/${url}`,
 
         })),
+        image1:row.imageURLS,
         price: row.price,
         availability: row.availability,
         location: row.location,
