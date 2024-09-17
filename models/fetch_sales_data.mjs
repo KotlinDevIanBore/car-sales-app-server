@@ -54,7 +54,8 @@ async function getSales() {
             price:row.price,
             availability:row.availability,
             location:row.location,
-            clicks: row.clicks
+            clicks: row.clicks,
+            sales:row.sales
                 
             }
 
