@@ -18,14 +18,13 @@ async function populateCarSearches(searchedCars) {
       }
 
       const { id } = car;
-      const query = `
-        INSERT INTO defaultdb.car_searches (car_id, searches)
-        VALUES (?, 1)
-        ON DUPLICATE KEY UPDATE searches = searches + 1
-      `;
+
+
+      const query = ` CALL populate_car_search_data (?)`
 
       try {
         await connection.execute(query, [id]);
+        console.log (`The id ${id} is of type ${typeof(id)}`)
       } catch (error) {
         console.error('Could not populate car_searches for car_id:', id, error);
       }
