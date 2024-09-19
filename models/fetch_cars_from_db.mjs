@@ -1,6 +1,9 @@
 import { closeConnection, getConnection } from "./db.mjs";
 import { API_URL } from "../API_URL";
 
+const CDN_URL = 'https://d2tc4b04xw42p0.cloudfront.net';
+
+
 let cachedCARS= null;
 let cacheTimeout = null;
 
@@ -70,7 +73,9 @@ return cachedCARS;
           brand: row.brand,
           name: row.name,
           imageIndex: "0",
-          image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
+          // image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
+          image: row.imageURLS.split(',').map(url => ({ URL: `${CDN_URL}/uploads/${url}` })),
+
           price: row.price,
           availability: row.availability,
           location: row.location,
