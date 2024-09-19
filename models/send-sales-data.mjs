@@ -1,30 +1,48 @@
 import { getConnection,closeConnection } from "./db.mjs";
 
 
- async function sendSearchLogs (){
+ async function sendSearchLogs (id){
 
 
     const connection =  await getConnection();
 
 
-    const query= `
-    SELECT 
-    CAST(dcs.click_timestamp AS DATE) as date,
-    COUNT(dcs.car_id) as value
-FROM defaultdb.daily_car_searches dcs 
-WHERE dcs.car_id = ?
-GROUP BY CAST(dcs.click_timestamp AS DATE);`
+//     const query= `
+//     SELECT 
+//     CAST(dcs.click_timestamp AS DATE) as date,
+//     COUNT(dcs.car_id) as value
+// FROM defaultdb.daily_car_searches dcs 
+// WHERE dcs.car_id = ?
+// GROUP BY CAST(dcs.click_timestamp AS DATE);`
+
+const query= `
+SELECT 
+    dcs.car_id, 
+    CAST(dcs.click_timestamp AS DATE) as date, 
+    COUNT(*) as value 
+FROM defaultdb.car_schema cs 
+INNER JOIN defaultdb.daily_car_searches dcs ON (dcs.car_id = cs.id) 
+GROUP BY dcs.car_id, CAST(dcs.click_timestamp AS DATE)
+`
+
+
     try{
 
-const dummyvalues = '75157036-2f6d-4866-bf01-68d0c9f6ec71'
-
-        const [rows] = await  connection.execute (query, [dummyvalues]);
+const dummyvalues = '75157036-2f6d-4866-bf01-68d0c9f6ec71';
 
 
-       const data=  rows.map ((row)=>(
+
+        // const [rows] = await  connection.execute (query, [id]);
+
+        const [rows] = await  connection.execute (query);
+
+
+
+       const data=  rows        
+       .map ((row)=>(
 
             {
-                group: 'Dataset 1',
+                id: row.car_id,
                 date: row.date, 
                 value: row.value
               }

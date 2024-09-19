@@ -6,6 +6,7 @@ async function sendSearchedCars() {
 
   const query = `
 SELECT 
+cs.id,
 cs.brand,
 cs.name,
 cs.imageIndex ,
