@@ -1,5 +1,6 @@
 import { getConnection, closeConnection } from "./db.mjs";
 import { API_URL } from "../API_URL";
+import { CDN_URL } from "../API_URL";
 
 async function getSales() {
   const  connection = await getConnection();
@@ -47,7 +48,8 @@ async function getSales() {
             imageIndex: row.imageIndex,
             // image: row.image.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
             image: row.image.split(',').map((url) => ({
-                URL: `${API_URL}/api/images/${url}`,
+                // URL: `${API_URL}/api/images/${url}`,
+                URL: `${CDN_URL}/uploads/${url}`,
       
               })),
             image1:row.image,

@@ -1,5 +1,6 @@
 import { API_URL } from "../API_URL";
 import { closeConnection, getConnection } from "./db.mjs";
+import { CDN_URL } from "../API_URL";
 
 async function fetchHomePage(cohort_id) {
   const connection = await getConnection();
@@ -36,12 +37,8 @@ on dcs.id = dci.car_id
       brand: row.brand,
       name: row.name,
       imageIndex: row.imageIndex,
-      image: row.URL.split(",").map((url) => ({URL:`${API_URL}/api/images/${url}`})),
-      //image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
-
-      //    URL: row.URL ,
-      //image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
-
+      // image: row.URL.split(",").map((url) => ({URL:`${API_URL}/api/images/${url}`})),
+      image: row.URL.split(",").map((url) => ({URL:`${CDN_URL}/uploads/${url}`})),
       price: row.price,
       availability: row.availability,
       location: row.location,

@@ -1,5 +1,6 @@
 import { API_URL } from "../API_URL";
 import { getConnection,closeConnection } from "./db.mjs";
+import { CDN_URL } from "../API_URL";
 
 export async function getSearchedCar(searchTerm) {
   const connection = await getConnection();
@@ -60,7 +61,9 @@ GROUP BY
         brand: row.brand,
         name: row.name,
         imageIndex: "0",
-        image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
+        // image: row.imageURLS.split(',').map((url) => ({ URL: `${API_URL}/api/images/${url}` })),
+        image: row.imageURLS.split(',').map((url) => ({ URL: `${CDN_URL}/uploads/${url}` })),
+
         price: row.price,
         availability: row.availability,
         location: row.location,

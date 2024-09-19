@@ -1,5 +1,6 @@
 import { getConnection, closeConnection } from "./db.mjs";
 import { API_URL } from "../API_URL";
+import { CDN_URL } from "../API_URL";
 
 async function sendSearchedCars() {
   const connection = await getConnection();
@@ -34,8 +35,8 @@ order by searches DESC;
       name: row.name,
       imageIndex: row.imageIndex,
       image: row.URL.split(",").map((url) => ({
-        URL: `${API_URL}/api/images/${url}`,
-        // { URL: `${API_URL}/api/images/${url}` }
+        // URL: `${API_URL}/api/images/${url}`,
+        URL: `${CDN_URL}/uploads/${url}`,
       })),
       price: row.price,
       availability: row.availability,

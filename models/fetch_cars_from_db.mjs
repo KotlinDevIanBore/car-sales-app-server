@@ -1,7 +1,9 @@
 import { closeConnection, getConnection } from "./db.mjs";
 import { API_URL } from "../API_URL";
 
-const CDN_URL = 'https://d2tc4b04xw42p0.cloudfront.net';
+import { CDN_URL } from "../API_URL";
+
+// const CDN_URL = 'https://d2tc4b04xw42p0.cloudfront.net';
 
 
 let cachedCARS= null;
