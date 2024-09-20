@@ -9,12 +9,14 @@ import sendSearchedCars from "../models/send-searched-cars.mjs";
 import fetchfromDb from "../models/fetch_cars_from_db.mjs";
 import fetchfromDbv1 from "../models/fetch_cars_from_db v1.mjs";
 import { getSearchedCar } from "../models/fetch_searched_cars.mjs";
+import { fetchfromDbModel } from "../models/fetch_cars_from_db.mjs";
 
 export const SearchLogsController = async (req,res)=>{
 
 
    
         const data = await sendSearchLogs ();
+
     
     
     
@@ -167,16 +169,32 @@ export const mostClickedCarsController = async (req,res)=>{
     export const fetchAllCarsController = async (req,res)=>{
 
         
-            try {
-              const CARS = await fetchfromDb();
+        //     try {
+        //       const CARS = await fetchfromDb();
         
-              const limit = req.params.limit;
-              const offset = req.params.page;
+        //       const limit = req.params.limit;
+        //       const offset = req.params.page;
         
-              res.json(CARS);
-            } catch (error) {
-              res.status(500).json({ error: "Internal Server Error" });
-            }
+        //       res.json(CARS);
+        //     } catch (error) {
+        //       res.status(500).json({ error: "Internal Server Error" });
+        //     }
+
+        try {
+
+
+                const fetchfromDbInstance = new fetchfromDbModel;
+
+                
+                const CARS = await fetchfromDbInstance.fetchfromDb();
+          
+                const limit = req.params.limit;
+                const offset = req.params.page;
+          
+                res.json(CARS);
+              } catch (error) {
+                res.status(500).json({ error: "Internal Server Error" });
+              }
           
 
 

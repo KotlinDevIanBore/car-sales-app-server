@@ -39,3 +39,45 @@ async function createCar(fetchData,modifiedFormData) {
 }
 
 export default createCar;
+
+
+// class CarModel extends DatabaseModel {
+
+//   async createCar (fetchData,modifiedFormData){
+
+//     const {brand, name, price, availability, location,cohort } =
+//     fetchData;
+
+//     const {id,imageIndex}= modifiedFormData;
+
+//     const query = `   CALL sp_create_car(?,?,?,?,?,?,?,?);
+
+//     `
+//     const params = [
+//       id,
+//       brand,
+//       name,
+//       imageIndex,
+//       price,
+//       availability,
+//       location,
+//       cohort
+//     ]
+
+
+//     try {
+
+//       await this.executeQuery(query,params);
+
+//     }
+//     catch (error){
+
+//       console.error ("Error in the CarModel", error)
+//     }
+
+
+//   }
+
+
+
+// }
