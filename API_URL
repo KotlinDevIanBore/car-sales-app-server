@@ -1,6 +1,6 @@
-  export const API_URL = 'https://car-sales-app-server-1.onrender.com';
+  // export const API_URL = 'https://car-sales-app-server-1.onrender.com';
 
   export const CDN_URL = 'https://d2tc4b04xw42p0.cloudfront.net';
 
-// export  const API_URL = 'http://localhost:3000';
+export  const API_URL = 'http://localhost:3000';
 

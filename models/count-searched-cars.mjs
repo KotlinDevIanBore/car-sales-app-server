@@ -6,9 +6,7 @@ async function populateCarSearches(searchedCars) {
   }
 
   const connection = await getConnection();
-  if (!connection) {
-    throw new Error("Failed to get a connection");
-  }
+  
 
   try {
     for (const car of searchedCars) {
