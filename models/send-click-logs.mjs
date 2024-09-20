@@ -1,4 +1,4 @@
-import { getConnection, closeConnection } from "./db.mjs";
+import { getConnection, closeConnection } from "../config/db.mjs";
 
 async function sendClickLogs() {
   const connection = await getConnection();

@@ -1,4 +1,4 @@
-import { getConnection, closeConnection } from "./db.mjs";
+import { getConnection, closeConnection } from "../config/db.mjs";
 
 async function populateCarSearches(searchedCars) {
   if (!Array.isArray(searchedCars) || searchedCars.length === 0) {

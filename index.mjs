@@ -16,7 +16,7 @@ import serveImages from "./infrastracture/serve-images.mjs";
 import fetchhomePageCarsRouter from "./routes/fetch-homepage-cars.mjs";
 import deleteCarRouter from "./routes/deletecar.mjs";
 import salesRouter from "./routes/fetch_sales-data.mjs";
-import searchLogsRouter from "./routes/send-sales-data.mjs";
+import searchLogsRouter from "./routes/send-search-logs.mjs";
 
 
 const app = express();

@@ -1,4 +1,4 @@
-import { getConnection, closeConnection } from "./db.mjs";
+import { getConnection, closeConnection } from "../config/db.mjs";
 import { API_URL } from "../API_URL";
 import { CDN_URL } from "../API_URL";
 

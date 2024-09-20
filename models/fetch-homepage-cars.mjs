@@ -1,5 +1,5 @@
 import { API_URL } from "../API_URL";
-import { closeConnection, getConnection } from "./db.mjs";
+import { closeConnection, getConnection } from "../config/db.mjs";
 import { CDN_URL } from "../API_URL";
 
 async function fetchHomePage(cohort_id) {

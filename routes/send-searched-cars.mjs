@@ -1,6 +1,7 @@
 import express from 'express';
 import { Router } from 'express';
 import sendSearchedCars from '../models/send-searched-cars.mjs';
+import * as controllers from '../controllers/controllers.mjs'
 
 
 const sendSearchedCarsRouter = Router();
@@ -8,25 +9,11 @@ const sendSearchedCarsRouter = Router();
 
 
 
-sendSearchedCarsRouter.get ('/api/searchedCars', async(req,res)=>{
+sendSearchedCarsRouter.get ('/api/searchedCars', controllers.sendSearchCarsControllers
 
-
-try {
-    const cars = await sendSearchedCars();
     
+   
 
-
-    res.json ({cars:cars,message:'Here are searched cars'})
-
-
-}
-catch(error){
-
-    console.error ('internal servevr error',error);
-    throw error;
-}
-
-
-})
+)
 
 export default sendSearchedCarsRouter;

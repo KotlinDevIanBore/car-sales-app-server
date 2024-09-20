@@ -1,4 +1,4 @@
-import { closeConnection, getConnection } from "./db.mjs";
+import { closeConnection, getConnection } from "../config/db.mjs";
 
 
 

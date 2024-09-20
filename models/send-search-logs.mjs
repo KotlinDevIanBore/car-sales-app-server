@@ -1,4 +1,4 @@
-import { getConnection,closeConnection } from "./db.mjs";
+import { getConnection,closeConnection } from "../config/db.mjs";
 
 
  async function sendSearchLogs (id){
@@ -28,7 +28,6 @@ GROUP BY dcs.car_id, CAST(dcs.click_timestamp AS DATE)
 
     try{
 
-const dummyvalues = '75157036-2f6d-4866-bf01-68d0c9f6ec71';
 
 
 

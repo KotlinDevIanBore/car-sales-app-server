@@ -1,5 +1,5 @@
 import { API_URL } from "../API_URL";
-import { getConnection,closeConnection } from "./db.mjs";
+import { getConnection,closeConnection } from "../config/db.mjs";
 import { CDN_URL } from "../API_URL";
 
 export async function getSearchedCar(searchTerm) {

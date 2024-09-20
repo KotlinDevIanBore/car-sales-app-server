@@ -1,22 +1,14 @@
 import { Router } from "express";
 import EditCarDetails from "../models/edit-car.mjs";
+import *  as controllers from "../controllers/controllers.mjs"
 
 
 const recieveCarEditsRouter= Router();
 
 
-recieveCarEditsRouter.post ("/api/EditedCars",(req,res)=>{
+recieveCarEditsRouter.post ("/api/EditedCars",controllers.editCarController
 
-
-
-const data = req.body;
-
-res.send ("Edited car data received");
-
-
-EditCarDetails(data)
-
-})
+)
 
 
 export default recieveCarEditsRouter;

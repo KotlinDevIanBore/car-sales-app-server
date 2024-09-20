@@ -1,4 +1,4 @@
-import { getConnection, closeConnection } from "./db.mjs";
+import { getConnection, closeConnection } from "../config/db.mjs";
 
 async function createCar(fetchData,modifiedFormData) {
   const connection = await getConnection();
