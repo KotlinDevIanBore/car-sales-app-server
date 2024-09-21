@@ -63,6 +63,12 @@ export default getSales;
 
 
 export class GetSalesModel extends DatabaseModel {
+
+    constructor (){
+
+        super(getConnection,closeConnection)
+      }
+    
     async  getSales() {
 
         const query = `

@@ -56,6 +56,12 @@ export default async function EditCarDetails(formData) {
 
 export class EditCarDetailsModel extends DatabaseModel{
 
+  constructor (){
+
+    super(getConnection,closeConnection)
+  }
+
+
   async  EditCarDetails(formData) {
 
 

@@ -35,6 +35,12 @@ export default deleteCar;
 
 export class DeleteCarModel extends DatabaseModel  {
 
+    constructor (){
+
+        super(getConnection,closeConnection)
+      }
+    
+
     async  deleteCar (id) {
 
         console.log (`Your deleted car id is ${id}`);

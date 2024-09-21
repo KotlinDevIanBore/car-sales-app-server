@@ -19,6 +19,7 @@ import { updateClicksModel } from "../models/track-clicks.mjs";
 import { EditCarDetailsModel } from "../models/edit-car.mjs";
 import { ClickedCarsModel } from "../models/most-clicked_cars.mjs";
 import { SearchLogsModels } from "../models/send-search-logs.mjs";
+import { closeConnection, getConnection } from "../config/db.mjs";
 
 export const SearchLogsController = async (req,res)=>{
 
@@ -26,7 +27,7 @@ export const SearchLogsController = async (req,res)=>{
    
         // const data = await sendSearchLogs ();
 
-        const SearchLogsModelsInstance = new  SearchLogsModels;
+        const SearchLogsModelsInstance = new  SearchLogsModels (getConnection,closeConnection);
 
         const data = await SearchLogsModelsInstance.sendSearchLogs();
 
@@ -51,7 +52,7 @@ export const mostClickedCarsController = async (req,res)=>{
 
         // const cars = await mostClickedCars();
 
-        const ClickedCarsModelInstance = new ClickedCarsModel;
+        const ClickedCarsModelInstance = new ClickedCarsModel((getConnection,closeConnection));
 
 
         const cars = await  ClickedCarsModelInstance.mostClickedCars()
@@ -90,7 +91,7 @@ export const mostClickedCarsController = async (req,res)=>{
             try {
                 const carId = req.params.id;
 
-                const DeleteCarModelInstance = new DeleteCarModel;
+                const DeleteCarModelInstance = new DeleteCarModel(getConnection,closeConnection);
 
                 DeleteCarModelInstance.deleteCar(carId)
             
@@ -130,7 +131,7 @@ export const mostClickedCarsController = async (req,res)=>{
                 
                 res.send ("Edited car data received");
 
-                const EditCarDetailsModelInstance = new EditCarDetailsModel;
+                const EditCarDetailsModelInstance = new EditCarDetailsModel(getConnection,closeConnection);
                 EditCarDetailsModelInstance.EditCarDetails (data)
                     }
             catch (error){
@@ -153,7 +154,7 @@ export const mostClickedCarsController = async (req,res)=>{
 
             try{
 
-                const updateClicksModelInstance = new updateClicksModel;
+                const updateClicksModelInstance = new updateClicksModel(getConnection,closeConnection);
 
                  updateClicksModelInstance.updateClicks (carId)
 
@@ -189,7 +190,7 @@ export const mostClickedCarsController = async (req,res)=>{
 
         try {
 
-                const GetSalesModelInstance = new GetSalesModel;
+                const GetSalesModelInstance = new GetSalesModel(getConnection,closeConnection);
                 const CARS = await GetSalesModelInstance.getSales();
         
         
@@ -235,10 +236,10 @@ export const mostClickedCarsController = async (req,res)=>{
                 const searchTerm = requestBody.Text;
             
 
-                 const getSearchedCarModelInstance = new getSearchedCarModel;
+                 const getSearchedCarModelInstance = new getSearchedCarModel(getConnection,closeConnection);
                  const cars = await getSearchedCarModelInstance.getSearchedCar(searchTerm);
 
-                 const populateCarSearchesModelInstance = new populateCarSearchesModel;
+                 const populateCarSearchesModelInstance = new populateCarSearchesModel(getConnection,closeConnection);
 
                  populateCarSearchesModelInstance.populateCarSearches (cars)
                         
@@ -279,7 +280,7 @@ export const mostClickedCarsController = async (req,res)=>{
             
         try {
                  
-                const SearchedCarsModelInstance = new SearchedCarsModel;
+                const SearchedCarsModelInstance = new SearchedCarsModel(getConnection,closeConnection);
                 const cars =  await SearchedCarsModelInstance.sendSearchedCars()                
             
             
@@ -303,7 +304,7 @@ export const mostClickedCarsController = async (req,res)=>{
         try {
 
 
-                const fetchfromDbInstance = new fetchfromDbModel;
+                const fetchfromDbInstance = new fetchfromDbModel(getConnection,closeConnection);
 
                 
                 const CARS = await fetchfromDbInstance.fetchfromDb();
@@ -329,7 +330,7 @@ export const mostClickedCarsController = async (req,res)=>{
                 const limit = req. query.limit;
                 const offset = req.query.offset;
 
-                const fetchFromDbModelv1Instance = new fetchFromDbModelv1
+                const fetchFromDbModelv1Instance = new fetchFromDbModelv1(getConnection,closeConnection)
 
 
                 const CARS = await fetchFromDbModelv1Instance.fetchfromDbv1(limit,offset);

@@ -64,6 +64,12 @@ export default sendSearchedCars;
 
 export class SearchedCarsModel extends DatabaseModel {
 
+  constructor (){
+
+    super(getConnection,closeConnection)
+  }
+
+
   async  sendSearchedCars() {
   
     const query = `

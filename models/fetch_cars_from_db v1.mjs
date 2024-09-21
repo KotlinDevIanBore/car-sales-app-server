@@ -88,6 +88,10 @@ export default fetchfromDbv1;
 
 export class fetchFromDbModelv1 extends DatabaseModel {
 
+  constructor () {
+    super(getConnection,closeConnection)
+  }
+
   async  fetchfromDbv1(limit, offset) {
 
     const query = `

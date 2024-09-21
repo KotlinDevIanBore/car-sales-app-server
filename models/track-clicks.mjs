@@ -33,6 +33,12 @@ export default async function updateClicks(carid) {
 
 export class updateClicksModel extends DatabaseModel {
 
+    constructor (){
+
+        super(getConnection,closeConnection)
+      }
+    
+
     async  updateClicks(carid) {
 
         if(!carid){
