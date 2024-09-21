@@ -74,6 +74,12 @@ export default async function mostClickedCars() {
 
     export class ClickedCarsModel extends DatabaseModel{
 
+      constructor (){
+
+        super(getConnection,closeConnection)
+      }
+    
+
       async  mostClickedCars() {
         // const connection = await getConnection();
 

@@ -1,4 +1,5 @@
 import { getConnection, closeConnection } from "../config/db.mjs";
+import DatabaseModel from "./database-model.mjs";
 
 async function createCar(fetchData,modifiedFormData) {
   const connection = await getConnection();
@@ -41,43 +42,49 @@ async function createCar(fetchData,modifiedFormData) {
 export default createCar;
 
 
-// class CarModel extends DatabaseModel {
-
-//   async createCar (fetchData,modifiedFormData){
-
-//     const {brand, name, price, availability, location,cohort } =
-//     fetchData;
-
-//     const {id,imageIndex}= modifiedFormData;
-
-//     const query = `   CALL sp_create_car(?,?,?,?,?,?,?,?);
-
-//     `
-//     const params = [
-//       id,
-//       brand,
-//       name,
-//       imageIndex,
-//       price,
-//       availability,
-//       location,
-//       cohort
-//     ]
+class CarModel extends DatabaseModel {
 
 
-//     try {
+  constructor (){
 
-//       await this.executeQuery(query,params);
+    super(getConnection,closeConnection)
+  }
 
-//     }
-//     catch (error){
+  async createCar (fetchData,modifiedFormData){
 
-//       console.error ("Error in the CarModel", error)
-//     }
+    const {brand, name, price, availability, location,cohort } =
+    fetchData;
+
+    const {id,imageIndex}= modifiedFormData;
+
+    const query = `   CALL sp_create_car(?,?,?,?,?,?,?,?);
+
+    `
+    const params = [
+      id,
+      brand,
+      name,
+      imageIndex,
+      price,
+      availability,
+      location,
+      cohort
+    ]
 
 
-//   }
+    try {
+
+      await this.executeQuery(query,params);
+
+    }
+    catch (error){
+
+      console.error ("Error in the CarModel", error)
+    }
+
+
+  }
 
 
 
-// }
+}

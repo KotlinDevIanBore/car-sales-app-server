@@ -83,6 +83,12 @@ GROUP BY
 
 export class getSearchedCarModel extends DatabaseModel {
 
+  constructor (){
+
+    super(getConnection,closeConnection)
+  }
+
+
   async  getSearchedCar(searchTerm) {
   
   

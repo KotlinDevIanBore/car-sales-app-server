@@ -64,6 +64,12 @@ export default sendSearchLogs
 
 export class SearchLogsModels extends DatabaseModel {
 
+    constructor (){
+
+        super(getConnection,closeConnection)
+      }
+    
+
     async  sendSearchLogs (id){
 
 

@@ -41,6 +41,11 @@ export default populateCarSearches;
 
 export class populateCarSearchesModel extends DatabaseModel{
 
+  constructor (){
+
+    super(getConnection,closeConnection)
+  }
+
   async  populateCarSearches(searchedCars) {
     if (!Array.isArray(searchedCars) || searchedCars.length === 0) {
       return {error:"searchedCars should be a non-empty array"} ;

@@ -116,6 +116,12 @@ export default fetchfromDb;
 
 class fetchfromDbModel extends DatabaseModel {
 
+  constructor (){
+
+    super(getConnection,closeConnection)
+  }
+
+
 
 
   async  fetchfromDb() {
