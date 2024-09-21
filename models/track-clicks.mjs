@@ -1,4 +1,5 @@
 import { getConnection, closeConnection } from "../config/db.mjs";
+import DatabaseModel from "./database-model.mjs";
 
 export default async function updateClicks(carid) {
 
@@ -30,19 +31,34 @@ export default async function updateClicks(carid) {
     }
 }
 
-const storedProcedure = `
-DELIMITER //
+export class updateClicksModel extends DatabaseModel {
 
-CREATE PROCEDURE PopulateCarClicks1(IN car_id varchar(128))
-BEGIN
-    INSERT INTO defaultdb.car_clicks (car_id, clicks)
-      VALUES (car_id, 1)
-      ON DUPLICATE KEY UPDATE clicks = clicks + 1;
+    async  updateClicks(carid) {
 
-      INSERT INTO defaultdb.car_click_log (car_id, click_timestamp)
-      VALUES (car_id, NOW());
-END //
+        if(!carid){
+            throw new Error ("Carid is required");
+            return;
+        }
 
-DELIMITER ;
+        const query = `
+        CALL PopulateCarClicks1(?)
+      `;
 
-`
+     const params = [carid]
+  
+    
+        
+        try {
+
+
+            this.executeQuery (query,params)
+                        
+        } catch (error) {
+            console.error('Error updating clicks:', error);
+            throw error;
+        }
+    
+    }
+
+
+}

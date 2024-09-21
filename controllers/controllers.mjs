@@ -1,6 +1,6 @@
 import sendSearchLogs from "../models/send-search-logs.mjs";
 import mostClickedCars from "../models/most-clicked_cars.mjs";
-import deleteCar from "../models/delete_car.mjs";
+import deleteCar, { DeleteCarModel } from "../models/delete_car.mjs";
 import EditCarDetails from "../models/edit-car.mjs";
 import updateClicks from "../models/track-clicks.mjs";
 import getSales from "../models/fetch_sales_data.mjs";
@@ -8,14 +8,27 @@ import populateCarSearches from "../models/count-searched-cars.mjs";
 import sendSearchedCars from "../models/send-searched-cars.mjs";
 import fetchfromDb from "../models/fetch_cars_from_db.mjs";
 import fetchfromDbv1 from "../models/fetch_cars_from_db v1.mjs";
-import { getSearchedCar } from "../models/fetch_searched_cars.mjs";
+// import { getSearchedCar } from "../models/fetch_searched_cars.mjs";
 import { fetchfromDbModel } from "../models/fetch_cars_from_db.mjs";
+import { fetchFromDbModelv1 } from "../models/fetch_cars_from_db v1.mjs";
+import { SearchedCarsModel } from "../models/send-searched-cars.mjs";
+import { getSearchedCarModel } from "../models/fetch_searched_cars.mjs";
+import { populateCarSearchesModel } from "../models/count-searched-cars.mjs";
+import { GetSalesModel } from "../models/fetch_sales_data.mjs";
+import { updateClicksModel } from "../models/track-clicks.mjs";
+import { EditCarDetailsModel } from "../models/edit-car.mjs";
+import { ClickedCarsModel } from "../models/most-clicked_cars.mjs";
+import { SearchLogsModels } from "../models/send-search-logs.mjs";
 
 export const SearchLogsController = async (req,res)=>{
 
 
    
-        const data = await sendSearchLogs ();
+        // const data = await sendSearchLogs ();
+
+        const SearchLogsModelsInstance = new  SearchLogsModels;
+
+        const data = await SearchLogsModelsInstance.sendSearchLogs();
 
     
     
@@ -36,7 +49,12 @@ export const SearchLogsController = async (req,res)=>{
 export const mostClickedCarsController = async (req,res)=>{
     
 
-        const cars = await mostClickedCars();
+        // const cars = await mostClickedCars();
+
+        const ClickedCarsModelInstance = new ClickedCarsModel;
+
+
+        const cars = await  ClickedCarsModelInstance.mostClickedCars()
     
         try{
             res.json({cars:cars,message: 'car payload dispatched'})
@@ -56,9 +74,32 @@ export const mostClickedCarsController = async (req,res)=>{
 
         
 
-            const carId = req.params.id;
+           
+
+            // try {
+            //     const carId = req.params.id;
             
-            deleteCar(carId);
+            //     deleteCar(carId);
+
+            // }
+            // catch (error){
+            //     console.error ('Error in deleting car', error);
+            //     throw error;
+            // }
+
+            try {
+                const carId = req.params.id;
+
+                const DeleteCarModelInstance = new DeleteCarModel;
+
+                DeleteCarModelInstance.deleteCar(carId)
+            
+
+            }
+            catch (error){
+                console.error ('Error in deleting car', error);
+                throw error;
+            }
             
             
             
@@ -66,16 +107,37 @@ export const mostClickedCarsController = async (req,res)=>{
 
     }
 
+
     export const editCarController = async (req,res)=>{
 
+            // try 
+            // {  
+            //     const data = req.body;
+                
+            //     res.send ("Edited car data received");
+            
+            
+            // EditCarDetails(data)}
+            // catch (error){
 
+            //     console.error ('Issue in the editCarController',error);
+            //     throw error
+            // }
 
-            const data = req.body;
-            
-            res.send ("Edited car data received");
-            
-            
-            EditCarDetails(data)
+            try 
+            {  
+                const data = req.body;
+                
+                res.send ("Edited car data received");
+
+                const EditCarDetailsModelInstance = new EditCarDetailsModel;
+                EditCarDetailsModelInstance.EditCarDetails (data)
+                    }
+            catch (error){
+
+                console.error ('Issue in the editCarController',error);
+                throw error
+            }
             
             
 
@@ -86,16 +148,50 @@ export const mostClickedCarsController = async (req,res)=>{
           
             const carId = req.body.carid
           
-            updateClicks(carId)
+            // updateClicks(carId)
+            // res.json({ message: "Click received!" });
+
+            try{
+
+                const updateClicksModelInstance = new updateClicksModel;
+
+                 updateClicksModelInstance.updateClicks (carId)
+
             res.json({ message: "Click received!" });
+
+
+            }
+            catch (error){
+
+                console.error ('eror updating the clicks',error);
+                throw error
+
+            }
           
     }
 
     export const fetchSalesControllers = async (req,res)=>{
 
-            try {
+
+
+        //     try {
         
-                const CARS = await getSales();
+        //         const CARS = await getSales();
+        
+        //         res.json (CARS);
+        
+        
+        //     }
+        //     catch (error) {
+        //         console.error ("Error fetching sales data")
+        // res.status(500).json ({error: "Internal Server Error"})
+        //     }
+
+        try {
+
+                const GetSalesModelInstance = new GetSalesModel;
+                const CARS = await GetSalesModelInstance.getSales();
+        
         
                 res.json (CARS);
         
@@ -111,28 +207,49 @@ export const mostClickedCarsController = async (req,res)=>{
 
     export const fetchSearchedCarsControllers = async (req,res) =>{
 
-            try {
-              const requestBody= req.body;
+        //     try {
+        //       const requestBody= req.body;
           
-              const searchTerm = requestBody.Text;
+        //       const searchTerm = requestBody.Text;
           
-               const cars = await getSearchedCar(searchTerm);
+        //        const cars = await getSearchedCar(searchTerm);
           
-               populateCarSearches(cars);
+        //        populateCarSearches(cars);
           
              
              
               
           
-              res.json({ message: "Search request received", cars: cars });
+        //       res.json({ message: "Search request received", cars: cars });
           
               
-            }
-            catch(error){
-              console.error ('error in search post method',error);
-              throw error;
-            }
+        //     }
+        //     catch(error){
+        //       console.error ('error in search post method',error);
+        //       throw error;
+        //     }
           
+        try {
+                const requestBody= req.body;
+            
+                const searchTerm = requestBody.Text;
+            
+
+                 const getSearchedCarModelInstance = new getSearchedCarModel;
+                 const cars = await getSearchedCarModelInstance.getSearchedCar(searchTerm);
+
+                 const populateCarSearchesModelInstance = new populateCarSearchesModel;
+
+                 populateCarSearchesModelInstance.populateCarSearches (cars)
+                        
+                res.json({ message: "Search request received", cars: cars });
+            
+                
+              }
+              catch(error){
+                console.error ('error in search post method',error);
+                throw error;
+              }
            
           
           
@@ -145,9 +262,25 @@ export const mostClickedCarsController = async (req,res)=>{
 
 
 
-            try {
-                const cars = await sendSearchedCars();
+        //     try {
+        //         const cars = await sendSearchedCars();
                 
+            
+            
+        //         res.json ({cars:cars,message:'Here are searched cars'})
+            
+            
+        //     }
+        //     catch(error){
+            
+        //         console.error ('internal servevr error',error);
+        //         throw error;
+        //     }
+            
+        try {
+                 
+                const SearchedCarsModelInstance = new SearchedCarsModel;
+                const cars =  await SearchedCarsModelInstance.sendSearchedCars()                
             
             
                 res.json ({cars:cars,message:'Here are searched cars'})
@@ -161,24 +294,11 @@ export const mostClickedCarsController = async (req,res)=>{
             }
             
             
-            
 
 
     }
 
     export const fetchAllCarsController = async (req,res)=>{
-
-        
-        //     try {
-        //       const CARS = await fetchfromDb();
-        
-        //       const limit = req.params.limit;
-        //       const offset = req.params.page;
-        
-        //       res.json(CARS);
-        //     } catch (error) {
-        //       res.status(500).json({ error: "Internal Server Error" });
-        //     }
 
         try {
 
@@ -203,17 +323,21 @@ export const mostClickedCarsController = async (req,res)=>{
 
     export const fetchAllCarsControllerv1 = async (req, res)=>{
 
-            try {
+        try {
               
         
-              const limit = req. query.limit;
-              const offset = req.query.offset;
-              const CARS = await fetchfromDbv1(limit,offset);
-        
-              res.json(CARS);
-            } catch (error) {
-              res.status(500).json({ error: "Internal Server Error" });
-            }
+                const limit = req. query.limit;
+                const offset = req.query.offset;
+
+                const fetchFromDbModelv1Instance = new fetchFromDbModelv1
+
+
+                const CARS = await fetchFromDbModelv1Instance.fetchfromDbv1(limit,offset);
+          
+                res.json(CARS);
+              } catch (error) {
+                res.status(500).json({ error: "Internal Server Error" });
+              }
           
 
     }
